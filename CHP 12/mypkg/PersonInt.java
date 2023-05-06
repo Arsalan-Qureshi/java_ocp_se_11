@@ -15,7 +15,9 @@ public class PersonInt implements Person {
 }
 
 interface Person {
-	/* Default Interface Method. */
+	/* Default Interface Method. 
+	   - Can not be static.
+	*/
 	default void greet(){
 		System.out.println("Hello!");
 	}

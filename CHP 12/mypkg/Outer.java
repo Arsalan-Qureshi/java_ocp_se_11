@@ -4,7 +4,8 @@ public class Outer {
 	
 	/* abstract/final public/private/protected extends/implements */
 	class Inner {
-		// static fields and methods are not allowed.
+		// static fields and methods are not allowed, except static final fields.
+		static final double PI = 3.142;
 		int x = 10;
 	}
 	

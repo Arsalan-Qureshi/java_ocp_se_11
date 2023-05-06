@@ -7,12 +7,14 @@ public class Anonymous {
 	}
 	
 	public static void main(String... args){
+		int local = 1000;
 		
 		Car car = new Anonymous().new Car(){
 			// Static methods not allowed.
 			final static int tyres = 4;
 			int CC(){
-				return 1000;
+				// Can be used as local is effectively final.
+				return local;
 			}
 		};
 		
