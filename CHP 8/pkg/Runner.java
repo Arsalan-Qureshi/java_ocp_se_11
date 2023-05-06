@@ -13,7 +13,8 @@ public class Runner extends Parent {
 		} */
 		
 		// hiddenMethod() in parent will be hidden by the override. Override rules are still in place for this.
-		hiddenMethod();
+		hiddenMethod(); // Sure about that?
+		Parent.hiddenMethod(); //I am hidden!
 	}
 	
 	public static void defaultAccessability(){
@@ -66,6 +67,7 @@ class Parent {
 		return Integer.valueOf(2);
 	}
 	
+	// To Override this method in a subclass is to hide it.
 	public static void hiddenMethod(){
 		System.out.println("I am hidden!");
 	}
