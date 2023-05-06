@@ -36,3 +36,17 @@ abstract class Pony {
 /* abstract class Horse extends Bird, Pony {
 	public abstract String getName();
 } */
+
+/*
+
+Integer i = 10;
+if(i instanceof List){} Does not compile as Integer class is marked final.
+The compiler can check for unrelated interfaces for reference to classes that are marked final.
+
+*/
+
+/*
+
+Interfaces do not declare constructors and thus do not participate in instance initialization, and they support multiple inheritance.
+
+*/
