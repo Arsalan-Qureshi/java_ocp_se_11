@@ -1,0 +1,9 @@
+javac --module-path mods -d feeding feeding/zoo/animal/feeding/*.java feeding/module-info.java
+java --module-path feeding  --module zoo.animal.feeding/zoo.animal.feeding.Task
+jar -cvf mods/zoo.animal.feeding.jar -C feeding/ .
+java -p mods (-d | --describe-module) zoo.animal.feeding
+java --list-moduless
+java -p mods --list-modules
+java --show-module-resolution -p feeding -m zoo.animal.feeding/zoo.animal.feeding.Task  (Debugging Modules)
+jar (-f | --file) mods/zoo.animal.feeding.jar (-d | --describe-module) // Equivalent to java command
+jdeps (-s | -summary) --module-path mods mods/zoo.animal.feeding.jar // Describe modular dependencies
