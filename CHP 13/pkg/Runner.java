@@ -2,10 +2,10 @@ package pkg;
 
 import java.lang.annotation.*;
 
-/* Exercises below uses a shorthand annotation for providing an array that contains a single element. */
+// Exercises below uses a shorthand annotation for providing an array that contains a single element.
 @Exercise(hoursPerDay = 3, exercises = "Strip Curl")
 public class Runner {
-	/* Does not require the element name to be specified. */
+	// Does not require the element name to be specified.
 	@Cardio(2)
 	int cardio;
 	
