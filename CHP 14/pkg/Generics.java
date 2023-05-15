@@ -56,7 +56,6 @@ class Crate<T>{
 	}
 }
 
-
 class Elephant{
 	void eat() { }
 	void sleep() { }
