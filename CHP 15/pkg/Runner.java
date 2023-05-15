@@ -12,9 +12,9 @@ public class Runner {
 		
 		// streams();
 		
-		// primitiveStreams();
+		primitiveStreams();
 		
-		collectors();
+		// collectors();
 	}
 	
 	public static void convenienceMethods() {
@@ -30,24 +30,24 @@ public class Runner {
 		c3.accept("Goku"); // Goku gets printed twice. The same argument is passed independently to both consumers.
 		
 		Function<Integer, Integer> before = x -> x + 1;
-		Function<Integer, Integer> after = x -> x * 1;
+		Function<Integer, Integer> after = x -> x * 2;
 		Function<Integer, Integer> combined = after.compose(before); // before executes first.
 		System.out.println(combined.apply(3)); //8
 	}
 	
 	// Introduced in Java 8.
 	public static void optional(){
-		print(Optional.empty());
-		print(Optional.of(97).isPresent());
-		print(Optional.of(97).get());
-		print(Optional.ofNullable(97));
-		print(Optional.ofNullable(null));
-		Optional.ofNullable(98).ifPresent(System.out::println);
+		print(Optional.empty()); // Optional.empty
+		print(Optional.of(97).isPresent()); // true
+		print(Optional.of(97).get()); // Optional[97]
+		print(Optional.ofNullable(97)); // Optional[97]
+		print(Optional.ofNullable(null));// Optional.empty
+		Optional.ofNullable(98).ifPresent(System.out::println); // 98
 		print(Optional.empty().orElse(99)); // returns 99
 		print(Optional.empty().orElse(Double.NaN)); // returns NaN
 		print(Optional.empty().orElseGet(() -> "Reginald Pooftah!"));
 		// Optional.empty().orElseThrow(); Throws NoSuchElementException
-		Optional.empty().orElseThrow(() -> new RuntimeException("It was me all along!")); // Thorw your own exception!
+		Optional.empty().orElseThrow(() -> new RuntimeException("It was me all along!")); // Throw your own exception!
 	}
 	
 	public static void streams(){
@@ -67,7 +67,7 @@ public class Runner {
 		
 		/* Common Terminal Operations */
 		print(Stream.of(1, 2, 3).count());
-		print(Stream.of(1, 2, 3).min((s1, s2) -> s1 - s2));
+		print(Stream.of(1, 2, 3).min((s1, s2) -> s1 - s2)); // Comparator is passed.
 		print(Stream.empty().min((s1, s2) -> 0)); // Comparator is not called. Stream.empty is returned.
 		
 		print(Stream.of("bat", "cat", "croc").findAny()); // returns bat usually
@@ -82,7 +82,7 @@ public class Runner {
 		
 		/* Streams do not implement the iterable interface. */
 		/* When the identity is not specified in a reduce method an Optional is returned. */
-		print(Stream.of("w", "o", "l", "f").reduce("", (s, c) -> s + c));
+		print(Stream.of("w", "o", "l", "f").reduce("", (s, c) -> s + c)); // wolf
 		
 		/* The type of i is inferred from the initial value. s is of type String from  the stream.*/
 		print(Stream.of("w","o","l","f").reduce(0, (i,s) -> i + s.length(), (a,b) -> a + b)); //4
@@ -104,12 +104,12 @@ public class Runner {
 		var total = Stream.of(one, two, three);
 		
 		total.flatMap(x -> x.stream()).forEach(System.out::print); //124789 Empty list also gets removed and elements are all made top-level in total.
-		print("");
+		print(""); // new line
 		Stream.of("a", "c", "b").sorted().forEach(System.out::println);  // Sorting done according to natural order.
 		Stream.of("a", "c", "b").sorted(Comparator.reverseOrder()).forEach(System.out::println);  // c b a
 		
 		/* peek(Consumer<? super T> action) is useful for debugging. */
-		Stream.of("brown bear", "black bear", "grizzly bear").filter(s -> s.startsWith("b")).peek(System.out::println).count(); // 1
+		print(Stream.of("brown bear", "black bear", "grizzly bear").filter(s -> s.startsWith("b")).peek(System.out::println).count()); // 2
 	}
 	
 	public static void primitiveStreams(){
@@ -121,7 +121,7 @@ public class Runner {
 		var pi = DoubleStream.of(3.14);
 		var varargs = DoubleStream.of(1.1, 1.2, 1.3);
 		
-		print(varargs.average());
+		print(varargs.average()); // OptionalDouble[1.2]
 		print(DoubleStream.of(1.1, 1.2, 1.3).max()); // OptionalDouble[1.3]
 		print(DoubleStream.of(1.1, 1.2, 1.3).min()); // OptionalDouble[1.1] uses getAsDouble()
 		IntStream.range(1, 5).forEach(System.out::println); //1 2 3 4
@@ -154,11 +154,14 @@ public class Runner {
 																		(s1, s2) -> s1 + "," + s2,
 																		TreeMap::new))); // {5=lions,bears, 6=tigers}
 																		
+		// groupingBy creates a map
 		print(Stream.of("lions", "tigers", "bears").collect(Collectors.groupingBy(String::length))); // {5=[lions, bears], 6=[tigers]} Map<Integer, List<String>>
 		print(Stream.of("lions", "tigers", "bears").collect(Collectors.groupingBy(String::length, Collectors.toSet()))); // {5=[lions, bears], 6=[tigers]} Map<Integer, Set<String>>
 		print(Stream.of("lions", "tigers", "bears").collect(Collectors.groupingBy(String::length,
 													TreeMap::new, Collectors.toSet()))); // {5=[lions, bears], 6=[tigers]} TreeMap<Integer, Set<String>>
 		
+		// partitioningBy creates a map with a boolean key.
+		// paritioning is done based on a Predicate function.
 		print(Stream.of("lions", "tigers", "bears").collect(Collectors.partitioningBy(s -> s.length() <= 5))); // {false=[tigers], true=[lions, bears]} Map<Boolean, List<String>>
 		print(Stream.of("lions", "tigers", "bears").collect(Collectors.partitioningBy(s -> s.length() <= 5, Collectors.toSet()))); // {false=[tigers], true=[lions, bears]} Map<Boolean, Set<String>>
 		
