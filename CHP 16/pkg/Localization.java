@@ -63,7 +63,7 @@ class Localization {
 		   0 = Put 0 if o digit exists.
 		*/	
 		NumberFormat f1 = new DecimalFormat("###,###,###.0");
-		print(f1.format(1234567.890)); //1,234,567.9 Number after deciamal point is rounded off.
+		print(f1.format(1234567.890)); //1,234,567.9 Number after decimal point is rounded off.
 	}
 	
 	public static void localizingDates() {
@@ -71,7 +71,6 @@ class Localization {
 		print(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM).format(LocalDate.now())); // Apr 21, 2023
 		print(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).format(LocalDate.now())); // April 21, 2023
 		print(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).format(LocalDate.now())); // Friday, April 21, 2023
-		
 		
 		print(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT).format(LocalTime.now())); //3:48 PM
 		print(DateTimeFormatter.ofLocalizedTime(FormatStyle.MEDIUM).format(LocalTime.now())); //3:48:42 PM
