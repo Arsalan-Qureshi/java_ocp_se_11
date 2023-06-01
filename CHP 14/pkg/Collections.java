@@ -5,7 +5,8 @@ import java.util.*;
 public class Collections {
 	public static void main(String... args){
 		// Might not have been called from another package.
-		new Collections().mapMethods();
+		// new Collections().mapMethods();
+		new Collections().sortedMap();
 	}
 	
 	private void listCreation(){
@@ -130,5 +131,25 @@ public class Collections {
 		fruits.forEach(System.out::println);
 		
 		fruits.clear();
+	}
+
+	/*
+	 * Keys are sorted. TreeMap implements this interface.
+	*/
+	private void sortedMap(){
+		SortedMap<String, Integer> sortedMap = new TreeMap<>();
+ 
+		sortedMap.put("z", 6);
+		sortedMap.put("y", 7);
+        sortedMap.put("x", 8);
+ 
+        print(sortedMap.get("x")); // 8
+        print(sortedMap.remove("y")); // 7
+
+        for (String key : sortedMap.keySet()) {
+            System.out.println("Key: " + key + ", Value: " + sortedMap.get(key));
+        }
+		/* Key: x, Value: 8
+		Key: z, Value: 6 */
 	}
 }
