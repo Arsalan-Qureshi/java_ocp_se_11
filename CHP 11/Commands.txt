@@ -1,5 +1,5 @@
 javac --module-path mods -d feeding feeding/zoo/animal/feeding/*.java feeding/module-info.java
-java --module-path feeding  --module zoo.animal.feeding/zoo.animal.feeding.Task
+java -p feeding -m feeding/zoo.animal.feeding.Task
 jar -cvf mods/zoo.animal.feeding.jar -C feeding/ .
 java -p mods (-d | --describe-module) zoo.animal.feeding
 java --list-moduless
