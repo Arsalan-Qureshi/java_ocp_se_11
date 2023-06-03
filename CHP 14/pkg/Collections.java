@@ -6,7 +6,8 @@ public class Collections {
 	public static void main(String... args){
 		// Might not have been called from another package.
 		// new Collections().mapMethods();
-		new Collections().sortedMap();
+
+		new Collections().deque();
 	}
 	
 	private void listCreation(){
@@ -134,7 +135,7 @@ public class Collections {
 	}
 
 	/*
-	 * Keys are sorted. TreeMap implements this interface.
+	 * Keys are sorted.
 	*/
 	private void sortedMap(){
 		SortedMap<String, Integer> sortedMap = new TreeMap<>();
@@ -151,5 +152,89 @@ public class Collections {
         }
 		/* Key: x, Value: 8
 		Key: z, Value: 6 */
+	}
+
+	/* 
+	 * <- Extends
+	 * <-- Implements
+	 * Set <- SortedSet <- NavigableSet <-- TreeSet
+	 * All the elements of a SortedSet must implement the Comparable interface.
+	 * All elements are sorted.
+	 */
+	private void sortedSet(){
+		SortedSet<String> ss = new TreeSet<String>();
+		ss.add("z");
+		ss.add("x");
+		ss.add("y");
+		ss.add("z");
+
+		print(ss); //[x, y, z]
+
+		ss.remove("z");
+		print(ss); //[x, y]
+	}
+
+	/*
+	 * Extends from SortedMap so keys will be sorted.
+	 */
+	private void navigableMap(){
+        NavigableMap<String, Integer> nm
+            = new TreeMap<String, Integer>();
+ 
+        nm.put("Z", 26);
+        nm.put("X", 24);
+        nm.put("Y", 25);
+ 
+        print(nm); //{X=24, Y=25, Z=26}
+		print(nm.descendingKeySet()); //[Z, Y, X]
+		print(nm.firstKey()); //X
+		print(nm.firstEntry()); //X=24
+		print(nm.lastKey()); //Z
+		print(nm.lastEntry()); //Z=26
+		// Returns a key-value mapping associated with the greatest key less than or equal to the given key, or null.
+		print(nm.floorEntry("Z")); //Z=26
+		print(nm.descendingMap()); //{Z=26, Y=25, X=24}
+		// Returns a view of the portion of this map whose keys are strictly less than toKey.
+		print(nm.headMap("Y")); //{X=24}
+		print(nm.subMap("X", true, "Y", true)); //{X=24, Y=25}
+		// Returns a view of the portion of this map whose keys are greater than (or equal to, if inclusive is true). The returned map is backed by this map, so changes in the returned map are reflected in this map, and vice-versa.
+		print(nm.tailMap("X")); //{X=24, Y=25, Z=26}
+	}
+
+	// Can traverse set in reverse order.
+	private void navigableSet(){
+		NavigableSet<Integer> ns = new TreeSet<>();
+        ns.add(90);
+        ns.add(91);
+        ns.add(92);
+ 
+        print(ns.descendingSet()); //[92, 91, 90]
+		print(ns.contains(90)); //true
+		print(ns.first()); //90
+		print(ns.last()); //92
+		print(ns.remove(90)); //true
+		print(ns.pollFirst()); //91
+		print(ns.pollLast()); //92
+	}
+
+	/*
+	 * Subtype of queue interface.
+	 * Acronym for double-ended queue.
+	 * Provides blocking methods: takeFirst and takeLast, which wait for elements to become available or space to become available.
+	 * Slower than array or linkedlist.
+	 */
+	private void deque(){
+		Deque<Integer> deque = new ArrayDeque<>();
+		deque.addFirst(100);
+		deque.addLast(200);
+
+		// Works like a charm.
+		for(int i : deque){
+			print(i);
+		}
+
+		int f = deque.removeFirst(); //100
+		int l = deque.removeLast(); //200
+		print(f + " , " + l);
 	}
 }

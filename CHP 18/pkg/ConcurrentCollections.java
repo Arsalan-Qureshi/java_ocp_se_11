@@ -11,7 +11,7 @@ public class ConcurrentCollections {
 	}
 	
 	public static void concurrentModification(){
-		/* Use the below line throws ConcurrentModificationException as food will not be updated during the second iteration in the
+		/* Using the below line throws ConcurrentModificationException as food will not be updated during the second iteration in the
 		for loop below.
 		var food = new HashMap<Integer, String>(); */
 		var food = new ConcurrentHashMap<Integer, String>();
