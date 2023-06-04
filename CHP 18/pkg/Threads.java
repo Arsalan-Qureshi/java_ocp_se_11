@@ -67,6 +67,7 @@ class Threads {
 		
 			/* boolean isDone(), boolean isCancelled(), boolean cancel(boolean myInterruptIfRunning), V get(), V get(long timeout, TimeUnit unit) */
 			// Won't return anything since Runnable does not either.
+			// throws TimeoutException
 			res.get(10, TimeUnit.SECONDS);
 			
 			print("Reached!");
