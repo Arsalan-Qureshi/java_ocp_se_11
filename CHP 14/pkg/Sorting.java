@@ -20,6 +20,7 @@ public class Sorting {
 		*/
 
         // Sorting is done in ascending order by default by the method reference.
+        // Returns a comparator.
         Comparator<Soldier> byWeight = Comparator.comparing(Soldier::getWeight).reversed();
 
         // Comparator.comparing{Double|Int|Long}(Soldier::byWeight).thenComparing{Double|Int|Long}(function) In case the first comparator returns 0.

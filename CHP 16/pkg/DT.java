@@ -26,7 +26,7 @@ class DT {
 		print(time.format(DateTimeFormatter.ISO_LOCAL_TIME)); //05:23:17
 		print(dt.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)); //2020-10-20T05:23:17
 		
-		/* MMMM = October, MMM = Jul, MM = 07, M = 7, a = am/pm, z = Time Zone Name, Z = Time Zone Offset*/
+		/* MMMM = October, MMM = Jul, MM = 07, M = 7, a = am/pm, z = Time Zone Name, Z = Time Zone Offset, u/y/Y = Year*/
 		var dtf = DateTimeFormatter.ofPattern("MMMM dd, yyyy 'at' hh:mm a z Z");
 		print(ZonedDateTime.now().format(dtf)); // April 21, 2023 at 05:33 AM PKT +0500
 	}

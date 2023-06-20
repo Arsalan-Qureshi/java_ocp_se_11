@@ -26,11 +26,21 @@ public class Runner {
 }
 
 /*
-Element named value() can be optional or required.
-Must not contain any other required elements.
-Annotation usage must not provide values for any other elements.
+In order to be used without a name:
+- Element named value() can be optional or required.
+- Must not contain any other required elements.
+- Annotation usage must not provide values for any other elements.
 */
 @Target(ElementType.FIELD)
 @interface Cardio {
 	int value();
+}
+
+/*
+ * The declaration below compiles. Only Test cannot be used without an element name now.
+ */
+@Target(ElementType.TYPE)
+@interface Test {
+  int value();
+  String hours();
 }

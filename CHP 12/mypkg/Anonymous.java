@@ -13,7 +13,7 @@ public class Anonymous {
 			// Static methods not allowed.
 			final static int tyres = 4;
 			int CC(){
-				// Can be used as local is effectively final.
+				// Can be used as local if effectively final.
 				return local;
 			}
 		};

@@ -15,7 +15,9 @@ class Runner {
 		
 		// fileAttributes();
 		
-		functionalProgramming();
+		// functionalProgramming();
+
+		new Runner().relativize();
 	}
 	
 	public static void pathCreation(){
@@ -58,8 +60,9 @@ class Runner {
 	
 	public static void pathMethods(){
 		print(Path.of("\\home\\namek").toString()); // \home\namek
-		print(Path.of("\\home\\namek").getNameCount()); //2
+		print(Path.of("\\home\\namek").getNameCount()); //2 Returns 1 for an empty path.
 		print(Path.of("\\home\\namek").getName(1)); // namek Throws IllegalArgumentException with incorrect indexes.
+		// subpath(1,1) will cause IllegalArgumentException to be thrown
 		print(Path.of("\\home\\namek").subpath(0, 1));// home endIndex is exclusive
 		print(Path.of("\\home\\namek").getFileName()); //namek
 		print(Path.of("\\home\\namek").getParent()); //home
@@ -70,11 +73,22 @@ class Runner {
 		/* Does not resolve path symbols and returns the absolute path if one is passed to the resolve method. */
 		print((Path.of("\\home\\namek").resolve(Path.of("vegeta")))); //\home\namek\vegeta
 		
-		/* Requires both paths to be absolute or relative. Throws IllegalArgumentException if type is mixed. */
+		/* Requires both paths to be absolute or relative. Throws IllegalArgumentException if type is mixed. 
+		 * It normalizes the paths before relativizing
+		*/
 		print(Path.of("homie.txt").relativize(Path.of("friends/homie.txt"))); //..\friends\homie.txt
 		
 		/* Helps remove redundancies in a path and allows us to compare. */
 		print(Path.of("./armadillo/../shells.txt").normalize()); // shells.txt
+		/*
+		 * Paths.get("photos\\..\\beaches\\.\\calangute\\a.txt");
+		 * Assume that you are starting from current directory.
+		 * Go into photos.
+		 * Return to parent of photos (current directory).
+		 * Remove photos from path.
+		 * According to documentation: all occurrences of "." are considered redundant. If a ".." is preceded by a non-".." name then both names are considered redundant (the process to identify such names is repeated until it is no longer applicable).
+		 * Becomes beaches\calangute\a.txt
+		 */
 		
 		/* 
 		   Calls normalize() then toRealPath() and throws an exception if the path does not exist.
@@ -215,5 +229,13 @@ class Runner {
 	
 	public static void print(Object o){
 		System.out.println(o);
+	}
+
+	private void relativize(){
+		Path p1 = Paths.get("photos\\..\\beaches\\.\\calangute\\a.txt");
+        Path p2 = p1.normalize();
+        Path p3 = p1.relativize(p2);
+        Path p4 = p2.relativize(p1);
+        System.out.println(p3);
 	}
 }
